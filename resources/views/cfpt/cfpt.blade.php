@@ -15,14 +15,14 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">Commentaire</div>
                             <div class="panel-body">
-                                <form>
+                                <form method="post" enctype="multipart/form-data" action="{{ url('auth.ImageController') }}">
                                     <div class="form-group">
                                         <label>Commentaire</label>
-                                        <textarea class="form-control" rows="5" id="comment"></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="choiseImage">Choisir une image</label>
-                                        <input type="file" class="form-control-file" id="exampleFormControlFile1" >
+                                        <input type="file" name="images[]" class="form-control-file" id="FileImg" accept="image/*" multiple>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Poster</button>
                                 </form></div>

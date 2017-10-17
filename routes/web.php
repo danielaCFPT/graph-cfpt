@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('cfpt/cfpt');
 });
+
+Route::get('upload', function (){
+    return view('cfpt/cfpt');
+});
+
+Route::post('upload', 'ImageController@upload');
