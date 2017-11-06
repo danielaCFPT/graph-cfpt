@@ -15,21 +15,25 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">Commentaire</div>
                             <div class="panel-body">
-                                <form method="post" enctype="multipart/form-data" action="{{ url('auth.ImageController') }}">
+                                <form method="Post" enctype="multipart/form-data" action="{{ url('/upload') }}">
+                                    {{ csrf_field() }}
                                     <div class="form-group">
                                         <label>Commentaire</label>
                                         <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="choiseImage">Choisir une image</label>
-                                        <input type="file" name="images[]" class="form-control-file" id="FileImg" accept="image/*" multiple>
+                                        <input type="file" class="form-control-file" name="images[]" id="images" accept="image/*" multiple>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Poster</button>
-                                </form></div>
+                                </form>
+                            </div>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div id="accordion" role="tablist">
+                                    {{--@foreach($comment->images as $image)--}}
+                                    @foreach($comments as $item)
                                     <div class="card">
                                         <div class="card-header" role="tab" id="headingOne">
                                             <h5 class="mb-0">
@@ -41,13 +45,19 @@
 
                                         <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                             <div class="card" style="width: 100%">
-                                                <img class="img-responsive" src="{{asset('img/renard.jpg')}}" alt="Card image cap">
+                                                @foreach($item->images as $image)
+                                                <img class="img-responsive" src="{{asset("storage/$image->image")}}" alt="Card image cap">
+                                                @endforeach
                                                 <div class="card-body">
-                                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+                                                    <p class="card-text">{{$item->comment}}</p>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    {{--@endforeach--}}
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

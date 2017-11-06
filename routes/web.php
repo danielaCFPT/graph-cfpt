@@ -11,12 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('cfpt/cfpt');
-});
+Route::get('/', "CommentController@getComment");
+Route::get('/test',"CommentController@getComment");
 
-Route::get('upload', function (){
-    return view('cfpt/cfpt');
-});
 
-Route::post('upload', 'ImageController@upload');
+Route::post('/upload', 'ImageController@upload');
