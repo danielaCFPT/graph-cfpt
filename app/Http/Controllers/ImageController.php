@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Comment;
 
 // import the Intervention Image Manager Class
-use Intervention\Image\ImageManager;
+//use Intervention\Image\ImageManager;
 
 class ImageController extends Controller
 {
@@ -17,33 +17,38 @@ class ImageController extends Controller
     }
     public function upload(Request $request)
     {
-        $valid = $this->validate($request, ['images' => 'required', ['images.*'=> 'image|mimes:jpeg,png,jpg,gif,svg|max:3048']]);
-        /*if($valid->fail()){
-            $this->resize(500, null, function ($constraint) {
+        $this->validate($request, ['images' => 'required|max:71680','images.*'=> 'image|mimes:jpeg,png,jpg,gif,svg|max:3072']);
+
+        foreach ($request->images as $image) {
+            $image->resize(500, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-        }else
-            {*/
-                foreach ($request->images as $image){
-                $image->store('public');
-                $this->insert($request);
-                Image::make($image)->resize(300, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-            //}
         }
+
+        $this->insert($request);
+
         return redirect('/');
     }
 
     public function insert(Request $request) {
         //dd($request);
-        $image = $request->input('image');
+        $images = $request->input('images');
         $comment = $request->input('comment');
-        Comment::create([ 'comment' => $comment]);
-        /*Images::create([
-            'image' => $image
-            'comment_id' => $
-        ]);*/
+        $commentUP = Comment::create([ 'comment' => $comment]);
+
+        foreach ($request->images as $image){
+            $path = $image->store('','public');
+            if($path == "")
+            {
+                return intl_get_error_message();
+            }else{
+                Image::create([
+                    'image' => $path,
+                    'comment_id' => $commentUP->id
+                ]);
+            }
+        }
+        return redirect('/');
     }
 }
 
