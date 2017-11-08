@@ -19,11 +19,7 @@ class ImageController extends Controller
     {
         $this->validate($request, ['images' => 'required|max:71680','images.*'=> 'image|mimes:jpeg,png,jpg,gif,svg|max:3072']);
 
-        foreach ($request->images as $image) {
-            $image->resize(500, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-        }
+
 
         $this->insert($request);
 
@@ -38,6 +34,7 @@ class ImageController extends Controller
 
         foreach ($request->images as $image){
             $path = $image->store('','public');
+            //$img = InterventionImage::make('public/'.$path)->resize(320, 240);
             if($path == "")
             {
                 return intl_get_error_message();
