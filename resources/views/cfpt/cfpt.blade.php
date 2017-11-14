@@ -50,38 +50,53 @@
 
                                                         </button>
                                                     </a>
-                                                        <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#exampleModal" id="supCom" name="supCom">
+                                                </form>
+
+
+                                                <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#Modal{{$item->id}}" id="supCom" name="supCom">
                                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                         </button>
-                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                                                    <div class="modal fade" id="Modal{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Comment</h5>
                                                                 </div>
+                                                                <form method="post" enctype="multipart/form-data" action="{{ route('edit', ['id'=>$item->id]) }}">
                                                                 <div class="modal-body">
-                                                                    <form>
+                                                                    {{csrf_field()}}
                                                                         <div class="form-group">
-                                                                            <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                                                            <input type="text" class="form-control" id="recipient-name">
+                                                                            <label for="message-text" class="col-form-label">Comment :</label>
+                                                                            <textarea class="form-control" id="EditComment" name="EditComment">{{$item->comment}}</textarea>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="message-text" class="col-form-label">Message:</label>
-                                                                            <textarea class="form-control" id="message-text"></textarea>
+                                                                            <label for="recipient-name" class="col-form-label">Images :</label>
+                                                                            <div class="row">
+                                                                                @foreach($item->images as $image)
+                                                                                    <div class="left">
+                                                                                        <img class="" src="storage/{{$image->image}}" height="100" width="150">
+                                                                                        <label class="checkbox-inline">
+                                                                                            <input type="checkbox" value="{{$image->id}}" id="imgSelect" name="imgSelect[]">
+                                                                                        </label>
+                                                                                    </div>
+
+                                                                                @endforeach
+                                                                            </div>
                                                                         </div>
-                                                                    </form>
+                                                                        <div class="form-group">
+                                                                            <label for="choiseImage">Ajouter une image</label>
+                                                                            <input type="file" class="form-control-file" name="images[]" id="images" accept="image/*" multiple>
+                                                                        </div>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <button type="button" class="btn btn-primary">Send message</button>
+                                                                    <button type="submit" class="btn btn-primary">Edit</button>
                                                                 </div>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </form>
                                             </div>
                                             <div id="collapseOne" class=" show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                                 <div class="card" style="width: 100%">
