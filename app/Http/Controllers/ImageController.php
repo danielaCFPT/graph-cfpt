@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Comment;
 
 // import the Intervention Image Manager Class
-//use Intervention\Image\ImageManager;
+
 
 class ImageController extends Controller
 {
@@ -34,7 +34,7 @@ class ImageController extends Controller
 
         foreach ($request->images as $image){
             $path = $image->store('','public');
-            //$img = InterventionImage::make('public/'.$path)->resize(320, 240);
+            \Intervention\Image\Facades\Image::make(public_path('/storage/'.$path))->resize(320, 240)->save();
             if($path == "")
             {
                 return intl_get_error_message();
