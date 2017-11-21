@@ -47,5 +47,11 @@ class ImageController extends Controller
         }
         return redirect('/');
     }
+
+    public function GetMetadataImg($id){
+        $image = Comment::findOrFail($id);
+        $data = Image::make($image->image)->exif();
+        return $data;
+    }
 }
 
