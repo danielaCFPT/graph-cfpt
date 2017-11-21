@@ -1,0 +1,18 @@
+#poubelle{
+    width:40px;
+    height:40px;
+    background:url("../img/spritV2.png") 0 0 no-repeat;
+    display: inline-block;
+}
+#crayon{
+    width:40px;
+    height:40px;
+    background:url("../img/spritV2.png") -40px 0 no-repeat;
+    display: inline-block;
+}
+#disquette{
+    width:40px;
+    height:40px;
+    background:url("../img/spritV2.png") -80px 0 no-repeat;
+    display: inline-block;
+}

@@ -25,7 +25,9 @@
                                         <label for="choiseImage">Choisir une image</label>
                                         <input type="file" class="form-control-file" name="images[]" id="images" accept="image/*" multiple>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Poster</button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i id="disquette" aria-hidden="true"></i>
+                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -45,8 +47,8 @@
                                             <div align="right">
                                                 <form method="Post">
                                                     <a href="{{ route('delete', ['id'=>$item->id]) }}">
-                                                        <button type="button" class="btn btn-default btn-lg" id="supCom" name="supCom">
-                                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                        <button type="button" class="btn btn-default" id="supCom" name="supCom">
+                                                            <i id="poubelle" aria-hidden="true"></i>
 
                                                         </button>
                                                     </a>
@@ -54,7 +56,7 @@
 
 
                                                 <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#Modal{{$item->id}}" id="supCom" name="supCom">
-                                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    <i id="crayon" aria-hidden="true"></i>
                                                         </button>
 
                                                     <div class="modal fade" id="Modal{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
