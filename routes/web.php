@@ -18,3 +18,4 @@ Route::get('/update/{id}', "CommentController@updateComment") -> name('update');
 Route::post('/edit/{id}', "CommentController@editComment") -> name('edit');
 
 Route::post('/upload', 'ImageController@upload');
+Route::get('/metaData/{id}', "ImageController@metaDataImage") -> name('metaData');

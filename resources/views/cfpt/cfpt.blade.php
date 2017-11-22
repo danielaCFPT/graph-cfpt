@@ -25,7 +25,7 @@
                                         <label for="choiseImage">Choisir une image</label>
                                         <input type="file" class="form-control-file" name="images[]" id="images" accept="image/*" multiple>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn-xs btn-primary">
                                         <i id="disquette" aria-hidden="true"></i>
                                     </button>
                                 </form>
@@ -37,28 +37,17 @@
                                     {{--@foreach($comment->images as $image)--}}
                                     @foreach($comments as $item)
                                         <div class="card">
-                                            <div class="card-header" role="tab" id="headingOne">
-                                                <h5 class="mb-0">
-                                                    <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                        Collapsible Group Item #1
-                                                    </a>
-                                                </h5>
-                                            </div>
                                             <div align="right">
                                                 <form method="Post">
                                                     <a href="{{ route('delete', ['id'=>$item->id]) }}">
-                                                        <button type="button" class="btn btn-default" id="supCom" name="supCom">
+                                                        <button type="button" class="btn btn-default btn-xs" id="supCom" name="supCom">
                                                             <i id="poubelle" aria-hidden="true"></i>
-
                                                         </button>
                                                     </a>
                                                 </form>
-
-
-                                                <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#Modal{{$item->id}}" id="supCom" name="supCom">
+                                                <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#Modal{{$item->id}}" id="supCom" name="supCom">
                                                     <i id="crayon" aria-hidden="true"></i>
                                                         </button>
-
                                                     <div class="modal fade" id="Modal{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
@@ -105,9 +94,18 @@
 
                                                     <div class="row">
                                                         @foreach($item->images as $image)
-                                                            <a class="col-md-3 thumbnail" data-fancybox="gallery" rel="lightbox" href="storage/{{$image->image}}">
-                                                                <img class="" src="storage/{{$image->image}}">
-                                                            </a>
+                                                            <div class="">
+                                                                <a class="col-md-3 thumbnail" data-fancybox="gallery" rel="lightbox" href="storage/{{$image->image}}">
+                                                                    <img class="" src="storage/{{$image->image}}">
+                                                                </a>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                    <div class="row">
+                                                        @foreach($item->images as $image)
+                                                            <div class="">
+                                                                <a class="col-md-3" href="{{ route('metaData', ['id'=>$image->id]) }}">MetaData de l'image id .{{$image->id}}</a>
+                                                            </div>
                                                         @endforeach
                                                     </div>
                                                     <div class="card-body">
